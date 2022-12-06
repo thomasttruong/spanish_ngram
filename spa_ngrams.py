@@ -17,6 +17,17 @@ for sentence in sentences:
         phonemic_word = epi.transliterate(new_word)
         words.append(phonemic_word)
 
-
-print(words)
-
+def make_ngram_dict(n):
+    #TODO make modular lol,
+    # only workd with unigrams :)
+    dict_ngrams = dict()
+    boundary_symbol = ''
+    for i in range(n-1):
+        boundary_symbol += 'ϵ'
+    for word in words:
+        word = [boundary_symbol] + word + [boundary_symbol]
+    
+    for character in word_split:
+        dict_ngrams[character] = dict_ngrams.get(character, 0) + 1
+    
+    return dict_ngrams
