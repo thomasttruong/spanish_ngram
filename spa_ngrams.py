@@ -14,7 +14,8 @@ for sentence in sentences:
     for word in sentence.rsplit():
         # remove punctuation
         new_word = word.translate(str.maketrans('', '', punct))
-        words.append(new_word)
+        phonemic_word = epi.transliterate(new_word)
+        words.append(phonemic_word)
 
 
 print(words)
