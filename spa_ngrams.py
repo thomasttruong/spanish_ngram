@@ -39,13 +39,14 @@ def main():
     bigram_dict  = make_ngram_dict(2)
     trigram_dict = make_ngram_dict(3)
 
-    # make_frequency_plot(unigram_dict, 'Unigram')
-    # make_frequency_plot(bigram_dict, 'Bigram')
-    # make_frequency_plot(trigram_dict, 'Trigram')
+    make_frequency_plot(unigram_dict, 'Unigram')
+    make_frequency_plot(bigram_dict, 'Bigram')
+    make_frequency_plot(trigram_dict, 'Trigram')
 
 
     # prints 3 random words using bigram dictionary
     # of length 8
+    print('Generating 3 words of length 8 using bigram dictionary')
     for j in range (3):
         print(random_bigram_word(bigram_dict, 8))
 
@@ -73,17 +74,21 @@ def make_ngram_dict(n):
     return sorted_ngrams
 
 def make_frequency_plot(sorted_ngrams, title):
+    plot_title = f'{title} frequency in Spanish'
+    file_path = f'plots/spa-{title.lower()}-freq.png'
+    print(f'Making graph of {plot_title} and saving to {file_path}...')
+
     # convert keys from tuples into strings
     ngram_keys = ["".join(tup) for tup in sorted_ngrams.keys()]
     curr_fig = plt.figure(1, figsize = (300, 8))
     plt.bar(ngram_keys, sorted_ngrams.values(), color='m', align = "edge", width = 0.3)
     plt.xticks(rotation = 90, size = 8)
 
-    plt.title(f'{title} frequency for Spanish')
+    plt.title(plot_title)
     plt.xlabel(f'{title}')
     plt.ylabel('Frequency')
 
-    plt.savefig(f'plots/spa-{title.lower()}-freq.png')
+    plt.savefig(file_path)
     plt.clf()
     
 def random_bigram_word(bigram_dict, average_length):
